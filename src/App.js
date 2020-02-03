@@ -1,12 +1,21 @@
 import React from 'react';
+import {BrowserRouter as Router, Route} from "react-router-dom"
 import './App.css';
-import Form from "./Components/Form"
+import SignUpForm from "./Components/SignUpForm"
+import SignInForm from "./Components/SignInForm"
 function App() {
   return (
+    <Router>
     <div className="App">
-      <Form/>
+     
+     {/* Everything is set to show on home page atm */}
+      <Route exact path="/signup" component={SignUpForm}/> 
+      <Route exact path="/signin" component={SignInForm}/>   
+      
+
    
     </div>
+    </Router>
   );
 }
 

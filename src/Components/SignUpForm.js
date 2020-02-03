@@ -1,7 +1,8 @@
 import React, { Component} from 'react';
+import {Link} from "react-router-dom";
 import axios from "axios"
 
-class Form extends Component{
+class SignUpForm extends Component{
     constructor(props){
     super(props)
     this.state={
@@ -57,9 +58,10 @@ submitHandler = e =>{
                     </div>
                     
                 <button type="submit">Submit</button>
+                <Link to="/signin"><button>Sign In</button></Link>
                 </form>
             </div>
         )
     }
 }
-export default Form
+export default SignUpForm
