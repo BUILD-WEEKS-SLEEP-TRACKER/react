@@ -5,9 +5,10 @@ class Form extends Component{
     constructor(props){
     super(props)
     this.state={
-        userId:'',
-        title:'',
-        body:''
+        firstName:'',
+        lastName:'',
+        email:'',
+        password:'',
     }
 }
 changeHandler=(e) =>{
@@ -22,24 +23,37 @@ submitHandler = e =>{
         console.log(response)
     })
     .catch(error=>{
-        console.log("something went wrong", error)
+        console.log("Data didn't post", error)
     })
 }
     render(){
-        const {userId, title, body} =this.state
+        const {firstName, lastName, email, password} =this.state
         return(
             <div>
                 <form onSubmit={this.submitHandler}>
+                    <label>New User </label>
+                    
                     <div>
-                    <input type="text" name="userId" value={userId} onChange={this.changeHandler}/>
+                        <label>First Name:
+                            <input type="text" name="firstName" value={firstName} onChange={this.changeHandler} placeholder="Enter First Name here"/>
+                        </label>
                     </div>
 
                     <div>
-                    <input type="text" name="title"value={title} onChange={this.changeHandler}/>
+                        <label>Last Name:
+                            <input type="text" name="lastName"value={lastName} onChange={this.changeHandler} placeholder="Enter Last Name here"/>
+                        </label>
+                    </div>
+                    <div>
+                        <label>Your Email:
+                            <input type="text" name="email"value={email} onChange={this.changeHandler} placeholder="Enter Email here"/>
+                        </label>
                     </div>
 
                     <div>
-                    <input type="text" name="body"value={body} onChange={this.changeHandler}/>
+                        <label>Password:
+                            <input type="text" name="password"value={password} onChange={this.changeHandler} placeholder="Enter Password here"/>
+                        </label>
                     </div>
                     
                 <button type="submit">Submit</button>
