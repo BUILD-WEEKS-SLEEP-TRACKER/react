@@ -1,7 +1,7 @@
 import React, { Component} from 'react';
 import {Link} from "react-router-dom";
 import axios from "axios"
-import { boolean } from 'yup';
+
 
 class SignUpForm extends Component{
     constructor(props){
@@ -31,36 +31,36 @@ submitHandler = e =>{
     render(){
         const {firstName, lastName, email, password} =this.state
         return(
-            <div>
-                <form onSubmit={this.submitHandler}>
+        <div className="field">
+                <form className="form" onSubmit={this.submitHandler}>
                     <label>New User </label>
                     
                     <div>
                         <label>First Name:
-                            <input type="text" name="firstName" value={firstName} onChange={this.changeHandler} placeholder="Enter First Name here"/>
+                            <input className="input" type="text" name="firstName" value={firstName} onChange={this.changeHandler} placeholder="Enter First Name here"/>
                         </label>
                     </div>
 
                     <div>
                         <label>Last Name:
-                            <input type="text" name="lastName"value={lastName} onChange={this.changeHandler} placeholder="Enter Last Name here"/>
+                            <input className="input" type="text" name="lastName"value={lastName} onChange={this.changeHandler} placeholder="Enter Last Name here"/>
                         </label>
                     </div>
                     <div>
                         <label>Your Email:
-                            <input type="text" name="email"value={email} onChange={this.changeHandler} placeholder="Enter Email here"/>
+                            <input className="input" type="text" name="email"value={email} onChange={this.changeHandler} placeholder="Enter Email here"/>
                         </label>
                     </div>
 
                     <div>
                         <label>Password:
-                            <input type="text" name="password"value={password} onChange={this.changeHandler} placeholder="Enter Password here"/>
+                            <input className="input" type="text" name="password"value={password} onChange={this.changeHandler} placeholder="Enter Password here"/>
                         </label>
                     </div>
-                    
+
                     <div>
                         <label>Terms of Service:
-                            <input name="TermsOfService" type="checkbox" onChange={this.changeHandler}/>
+                            <input className="input" name="TermsOfService" type="checkbox" onChange={this.changeHandler}/>
                         </label>
                  
                     </div>
