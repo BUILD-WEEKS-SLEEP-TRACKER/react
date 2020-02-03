@@ -1,4 +1,5 @@
 import React, { Component} from 'react';
+import axios from "axios"
 
 class Form extends Component{
     constructor(props){
@@ -16,6 +17,13 @@ changeHandler=(e) =>{
 submitHandler = e =>{
     e.preventDefault()
     console.log(this.state)
+    axios.post("", this.state)// API LINK HERE
+    .then(response=>{
+        console.log(response)
+    })
+    .catch(error=>{
+        console.log("something went wrong", error)
+    })
 }
     render(){
         const {userId, title, body} =this.state
