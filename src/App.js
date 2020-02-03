@@ -10,7 +10,7 @@ function App() {
      
      {/* Everything is set to show on home page atm */}
       <Route exact path="/signup" component={SignUpForm}/> 
-      <Route exact path="/signin" component={SignInForm}/>   
+      <Route exact path="/" component={SignInForm}/>   
       
 
    

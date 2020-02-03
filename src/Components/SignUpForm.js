@@ -1,6 +1,7 @@
 import React, { Component} from 'react';
 import {Link} from "react-router-dom";
 import axios from "axios"
+import { boolean } from 'yup';
 
 class SignUpForm extends Component{
     constructor(props){
@@ -57,8 +58,15 @@ submitHandler = e =>{
                         </label>
                     </div>
                     
+                    <div>
+                        <label>Terms of Service:
+                            <input name="TermsOfService" type="checkbox" onChange={this.changeHandler}/>
+                        </label>
+                 
+                    </div>
+                    
                 <button type="submit">Submit</button>
-                <Link to="/signin"><button>Sign In</button></Link>
+                <Link to="/"><button>Sign In</button></Link>
                 </form>
             </div>
         )
