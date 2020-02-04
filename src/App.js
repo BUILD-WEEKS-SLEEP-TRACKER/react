@@ -1,19 +1,14 @@
-
 import React from 'react';
 import { reducer } from './utils/reducers'
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux'
 import { BrowserRouter as Router, Route } from "react-router-dom";
-
 import SignUpForm from "./Components/SignUpForm"
 import SignInForm from "./Components/SignInForm"
-
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
-
 import ChartDisplay from './Components/ChartDisplay';
 import Header from './Components/Header';
-
 import './App.css';
 
 const store = createStore(
