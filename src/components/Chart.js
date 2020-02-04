@@ -1,29 +1,25 @@
 import React, { Component } from 'react';
-import { fetchChartData } from '../utils/actions'
 
 import { Bar } from 'react-chartjs-2';
-import { connect } from 'react-redux';
 
 class Chart extends Component {
     constructor(props) {
         super(props)
             this.state = {
-                chartData: props.chartData
+                data: props.data
             }
     }
 
     render() {
         return (
-            <div className = 'chart'>
+            <div style = {{ position: 'relative', width: 578, height: 650 }} className = 'chart'>
                 <Bar 
-                    data = {this.state.chartData}
-                    width = {50}
-                    height = {5}
+                    data = {this.state.data}
                     options = {{
                         title: {
                             display: true,
                             text: 'Your week of sleep',
-                            fontSize: 30
+                            fontSize: 13
                         },
                         legend: {
                             display: false
@@ -42,14 +38,4 @@ class Chart extends Component {
     }
 }
 
-const mapStateToProps = state => {
-    console.log(state)
-    return({
-        chartData: state.chartData
-    })
-};
-
-export default connect(
-    mapStateToProps,
-    fetchChartData
-)(Chart);
+export default Chart;
