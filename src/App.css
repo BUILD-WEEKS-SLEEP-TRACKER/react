@@ -45,27 +45,8 @@ footer, header, hgroup, menu, nav, section {
  
 }
 
-.container {
-  display:flex;
-}
 
-.field {
-
- 
- 
-  width: 50%;
-  height: 25vh;
-
-  border-radius: 4px;
-  position: relative;
- 
-  transition: 0.3s all;
-}
-.field:hover {
-  background-color: rgba(255, 255, 255, 0.45);
-  box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 1);
-
-}
 body {
 	line-height: 1;
 }*/
+

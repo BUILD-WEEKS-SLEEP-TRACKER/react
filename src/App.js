@@ -3,7 +3,7 @@ import React from 'react';
 import { reducer } from './utils/reducers'
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux'
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import SignUpForm from "./Components/SignUpForm"
 import SignInForm from "./Components/SignInForm"
@@ -11,8 +11,8 @@ import SignInForm from "./Components/SignInForm"
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 
-import ChartDisplay from './components/ChartDisplay';
-import Header from './components/Header';
+import ChartDisplay from './Components/ChartDisplay';
+import Header from './Components/Header';
 
 import './App.css';
 
@@ -28,8 +28,8 @@ function App() {
       <div className="App">
 
         <Header />
-        <ChartDisplay />
-        <Chart />
+        
+        <Route exact path="/chartdisplay" component={ChartDisplay}/> 
         <Route exact path="/signup" component={SignUpForm}/> 
         <Route exact path="/" component={SignInForm}/> 
 
