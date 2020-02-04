@@ -1,4 +1,5 @@
 .App {
+
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -31,6 +32,39 @@ time, mark, audio, video {
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
 	display: block;
+
+  text-align: center;
+  background:black;
+  color:white;
+  height:100vh;
+  border:1px solid blue;
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items:center;
+ 
+}
+
+.container {
+  display:flex;
+}
+
+.field {
+
+ 
+ 
+  width: 50%;
+  height: 25vh;
+
+  border-radius: 4px;
+  position: relative;
+ 
+  transition: 0.3s all;
+}
+.field:hover {
+  background-color: rgba(255, 255, 255, 0.45);
+  box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 1);
+
 }
 body {
 	line-height: 1;
