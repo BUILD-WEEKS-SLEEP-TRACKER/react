@@ -1,26 +1,29 @@
 import React from 'react';
-import { reducer } from '../reducers'
-import { createStore, applyMiddlware } from 'redux';
-import { Provider } from 'react-redux'
-// import thunk from 'redux-thunk';
-// import logger from 'redux-logger';
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
+//components
+import SleepList from "./components/SleepList";
+import PrivateRoute from './components/PrivateRoute';
 import Chart from './components/Chart';
+import Login from './components/Login';
+import SignUp from './components/SignUp';
 
 import './App.css';
 
-const store = createStore(
-  reducer, 
-  // applyMiddleware (thunk, logger)
-)
+
 
 function App() {
   return (
-    <Provider store = {store}>
       <div className="App">
-        <Chart />
+          <Route exact path='/' component={Login} />
+          <Route path='/SignUp' component={SignUp} />
+          <PrivateRoute exact path='/home' component={SleepList} />
+          
+          <PrivateRoute exact path='/home' component={Chart} />
+        <SleepList />
       </div>
-    </Provider>
+   
+
   );
 }
 
