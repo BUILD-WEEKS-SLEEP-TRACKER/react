@@ -39,6 +39,7 @@ const Header= styled.h1`
 
  const  Form=styled.div`
     margin-left:50%;
+    color:white;
  `
  const Button=styled.button`
     background: #39869D;
