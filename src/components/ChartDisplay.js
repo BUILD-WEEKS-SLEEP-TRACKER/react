@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { ChartContainer, H2, ChartTitle } from './ChartStyles';
-import { fetchChartData } from '../utils/actions'
+// import { fetchChartData } from '../utils/actions'
 import Chart from './Chart'
 
 
@@ -88,5 +88,5 @@ const mapStateToProps = state => {
 
 export default connect(
     mapStateToProps,
-    fetchChartData
+    // fetchChartData
 )(ChartDisplay);
