@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { ChartContainer, H2, ChartTitle } from './ChartStyles';
-import { fetchChartData } from '../utils/actions'
+// import { fetchChartData } from '../utils/actions'
 import Chart from './Chart'
 
 
@@ -21,20 +21,21 @@ class ChartDisplay extends Component {
     }
 
 
-    
-    setGradientColor = (canvas, color) => {
-        const ctx = canvas.getContext('2d');
-        const gradient = ctx.createLinearGradient(0,0, 600, 550);
-        gradient.addColorStop(0, color);
-        return gradient;
-    }    
+//   setGradientColor = (canvas, color) => {
+//         const ctx = canvas.getContext('2d');
+//         const gradient = ctx.createLinearGradient(0,0, 600, 550);
+//         gradient.addColorStop(0, color);
+//         return gradient;
+//     }        
+  
 
     getChartData = canvas => {
         const data = this.state.data;
+        console.log(data);
         if(data.datasets) {
             let colors = [];
             data.datasets.foreach((set, i) => {
-                set.backgroundColor = this.setGradientColor(canvas, colors[i]);
+                set.backgroundColor = 'green';
 
             })
         }
@@ -48,18 +49,12 @@ class ChartDisplay extends Component {
                 {
                     label: 'Hours slept',
                     data: [
-                        6,
-                        6.5,
-                        7,
-                        8,
-                        6,
-                        6,
-                        9
+                        this.state.hours_slept
                     ]
                 }
             ],
             backgroundColor: [
-                'white'
+                'green'
             ]
         }
     })
@@ -88,5 +83,5 @@ const mapStateToProps = state => {
 
 export default connect(
     mapStateToProps,
-    fetchChartData
+    // fetchChartData
 )(ChartDisplay);

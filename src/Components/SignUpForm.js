@@ -1,75 +1,105 @@
-import React, { Component} from 'react';
+import React, { useState } from 'react';
 import {Link} from "react-router-dom";
 import axios from "axios"
 
+import { register } from "../utils/actions/index";
+import { connect } from "react-redux";
 
-class SignUpForm extends Component{
-    constructor(props){
-    super(props)
-    this.state={
-        firstName:'',
-        lastName:'',
-        email:'',
-        password:'',
-    }
-}
-changeHandler=(e) =>{
-    this.setState({[e.target.name]: e.target.value})  // setting change handler to the "name" attribute. Avoids having to add handler to each input
+
+const SignUpForm = props => {
+console.log("this is props in Signupform", props)
+const initialState = {
+    firstName: "",
+        lastName: "",
+        email: "",
+        password: "",
+    };
+
+
+const [payload, setPayload] = useState(initialState);
+
+
+const changeHandler=(e) =>{
+    setPayload({...payload, [e.target.name]: e.target.value})  // setting change handler to the "name" attribute. Avoids having to add handler to each input
+    
 }
 
-submitHandler = e =>{
+const submitHandler = e =>{
     e.preventDefault()
-    console.log(this.state)
-    axios.post("", this.state)// API LINK HERE
-    .then(response=>{
-        console.log(response)
+    console.log("this is the object", payload)
+    props.history.push("/sign-in");
+    props.register(payload)
+    setPayload({
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
     })
-    .catch(error=>{
-        console.log("Data didn't post", error)
-    })
+      // axios.post("https://bw-sleeptracker.herokuapp.com/api/auth/register", this.state)// API LINK HERE
+      // .then(response=>{
+      //     console.log("this is the response from submit", response)
+        
+          
+      // })
+      // .catch(error=>{
+      //     console.log("Data didn't post", error)
+      // })
 }
-    render(){
-        const {firstName, lastName, email, password} =this.state
-        return(
+    return (
         <div className="field">
-                <form className="form" onSubmit={this.submitHandler}>
+                <form className="form" onSubmit={submitHandler}>
                     <label>New User </label>
                     
                     <div>
                         <label>First Name:
-                            <input className="input" type="text" name="firstName" value={firstName} onChange={this.changeHandler} placeholder="Enter First Name here"/>
+                            <input className="input" type="text" name="firstName" value={payload.firstName} onChange={changeHandler} placeholder="Enter First Name here"/>
                         </label>
                     </div>
 
                     <div>
                         <label>Last Name:
-                            <input className="input" type="text" name="lastName"value={lastName} onChange={this.changeHandler} placeholder="Enter Last Name here"/>
+                            <input className="input" type="text" name="lastName"value={payload.lastName} onChange={changeHandler} placeholder="Enter Last Name here"/>
                         </label>
                     </div>
                     <div>
                         <label>Your Email:
-                            <input className="input" type="text" name="email"value={email} onChange={this.changeHandler} placeholder="Enter Email here"/>
+                            <input className="input" type="text" name="email"value={payload.email} onChange={changeHandler} placeholder="Enter Email here"/>
                         </label>
                     </div>
 
                     <div>
                         <label>Password:
-                            <input className="input" type="text" name="password"value={password} onChange={this.changeHandler} placeholder="Enter Password here"/>
+                            <input className="input" type="text" name="password"value={payload.password} onChange={changeHandler} placeholder="Enter Password here"/>
                         </label>
                     </div>
 
-                    <div>
+                    {/* <div>
                         <label>Terms of Service:
                             <input className="input" name="TermsOfService" type="checkbox" onChange={this.changeHandler}/>
                         </label>
                  
-                    </div>
+                    </div> */}
                     
-                <button type="submit">Submit</button>
-                <Link to="/"><button>Sign In</button></Link>
+                <button type="submit">Sign-Up!</button>
+                <Link to="/sign-in"><button>Sign In</button></Link>
                 </form>
             </div>
-        )
+    )
+  }
+
+const mapStateToProps = state => {
+    return {
+        data: [{ 
+          email: state.email,
+          name: state.name,
+          password: state.password
+        }]
     }
 }
-export default SignUpForm
+
+export default connect(
+  mapStateToProps,
+  { register }
+)(SignUpForm);
+
+
