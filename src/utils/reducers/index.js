@@ -26,9 +26,11 @@ const initialState = {
       dayRating: "",
       timeCreated: "",
       totalTimeSlept: 0,  
-      chartData: []
+      
     }
   ],
+  chartData: [],
+    
   isLoading: false,
   isLoggedIn: false,
   
@@ -102,8 +104,10 @@ export const reducer = (state = initialState, action) => {
         ...state,
         fetchingData: true
       };
+    
     case ADD_ENTRY_SUCCESS:
-      return {
+      console.log("this is action /payload", action.payload)
+        return {
         ...state,
         fetchingData: false,
         data: action.payload

@@ -116,7 +116,7 @@ export const getSleepEntries = () => dispatch => {
   export const addEntry = (payload) => dispatch => {
     dispatch ({ type: ADD_ENTRY_START });
     return axiosWithAuth()
-    .post('/users/1/create', payload)
+    .post(`api/users/${localStorage.getItem("id")}/create`, payload)
     .then(res => {
         console.log("this is add entry", res);
         dispatch({ type: ADD_ENTRY_SUCCESS, payload: res.data });
