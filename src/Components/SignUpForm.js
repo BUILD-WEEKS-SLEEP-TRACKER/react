@@ -1,75 +1,137 @@
-import React, { Component} from 'react';
-import {Link} from "react-router-dom";
-import axios from "axios"
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
 
+import { register } from "../utils/actions/index";
+import { connect } from "react-redux";
+import { Header, Paragraph, Form, Name, Button, Input } from "./SignUpStyles";
 
-class SignUpForm extends Component{
-    constructor(props){
-    super(props)
-    this.state={
-        firstName:'',
-        lastName:'',
-        email:'',
-        password:'',
-    }
-}
-changeHandler=(e) =>{
-    this.setState({[e.target.name]: e.target.value})  // setting change handler to the "name" attribute. Avoids having to add handler to each input
-}
+const SignUpForm = props => {
+  console.log("this is props in Signupform", props);
+  const initialState = {
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: ""
+  };
 
-submitHandler = e =>{
-    e.preventDefault()
-    console.log(this.state)
-    axios.post("", this.state)// API LINK HERE
-    .then(response=>{
-        console.log(response)
-    })
-    .catch(error=>{
-        console.log("Data didn't post", error)
-    })
-}
-    render(){
-        const {firstName, lastName, email, password} =this.state
-        return(
-        <div className="field">
-                <form className="form" onSubmit={this.submitHandler}>
-                    <label>New User </label>
-                    
-                    <div>
-                        <label>First Name:
-                            <input className="input" type="text" name="firstName" value={firstName} onChange={this.changeHandler} placeholder="Enter First Name here"/>
-                        </label>
-                    </div>
+  const [payload, setPayload] = useState(initialState);
 
-                    <div>
-                        <label>Last Name:
-                            <input className="input" type="text" name="lastName"value={lastName} onChange={this.changeHandler} placeholder="Enter Last Name here"/>
-                        </label>
-                    </div>
-                    <div>
-                        <label>Your Email:
-                            <input className="input" type="text" name="email"value={email} onChange={this.changeHandler} placeholder="Enter Email here"/>
-                        </label>
-                    </div>
+  const changeHandler = e => {
+    setPayload({ ...payload, [e.target.name]: e.target.value }); // setting change handler to the "name" attribute. Avoids having to add handler to each input
+  };
 
-                    <div>
-                        <label>Password:
-                            <input className="input" type="text" name="password"value={password} onChange={this.changeHandler} placeholder="Enter Password here"/>
-                        </label>
-                    </div>
+  const submitHandler = e => {
+    e.preventDefault();
+    console.log("this is the object", payload);
+    props.register(payload);
+    setPayload({
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: ""
+    });
+    props.history.push("/sign-in");
+    // axios.post("https://bw-sleeptracker.herokuapp.com/api/auth/register", this.state)// API LINK HERE
+    // .then(response=>{
+    //     console.log("this is the response from submit", response)
 
-                    <div>
+    // })
+    // .catch(error=>{
+    //     console.log("Data didn't post", error)
+    // })
+  };
+  return (
+    <div className="field">
+      <div>
+        <Header>Let’s get started!</Header>
+        <Paragraph>
+          Let Sleep Tracker help you discover your ideal sleep schedule.
+        </Paragraph>
+      </div>
+      <Form className="form" onSubmit={submitHandler}>
+        <Name>
+          <div>
+            <label>
+              <Input
+                className="input"
+                style={{ width: "208px", height: "56px" }}
+                type="text"
+                name="firstName"
+                value={payload.firstName}
+                onChange={changeHandler}
+                placeholder="Enter First Name here"
+              />
+            </label>
+          </div>
+       
+          <div>
+            <label>
+              <Input
+                className="input"
+                style={{ width: "208px", height: "56px" }}
+                type="text"
+                name="lastName"
+                value={payload.lastName}
+                onChange={changeHandler}
+                placeholder="Enter Last Name here"
+              />
+            </label>
+          </div>
+        </Name>
+        <div>
+          <label>
+            <Input
+              className="input"
+              style={{ width: "560px", height: "56px" }}
+              type="text"
+              name="email"
+              value={payload.email}
+              onChange={changeHandler}
+              placeholder="Enter Email here"
+            />
+          </label>
+        </div>
+
+        <div>
+          <label>
+            <Input
+              className="input"
+              style={{ width: "560px", height: "56px" }}
+              type="text"
+              name="password"
+              value={payload.password}
+              onChange={changeHandler}
+              placeholder="Enter Password here"
+            />
+          </label>
+        </div>
+
+        {/* <div>
                         <label>Terms of Service:
                             <input className="input" name="TermsOfService" type="checkbox" onChange={this.changeHandler}/>
                         </label>
                  
-                    </div>
-                    
-                <button type="submit">Submit</button>
-                <Link to="/"><button>Sign In</button></Link>
-                </form>
-            </div>
-        )
-    }
-}
-export default SignUpForm
+                    </div> */}
+        <div>
+            <Button type="submit">Sign-Up!</Button>
+            <Link to="/sign-in"><Button>Sign In</Button></Link>
+        </div>
+      </Form>
+    </div>
+  );
+};
+
+const mapStateToProps = state => {
+  return {
+    data: [
+      {
+        email: state.email,
+        name: state.name,
+        password: state.password
+      }
+    ]
+  };
+};
+
+export default connect(mapStateToProps, { register })(SignUpForm);
