@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
+import { NavLink } from 'react-router-dom';
 import { ChartContainer, H2, ChartTitle } from './ChartStyles';
 // import { fetchChartData } from '../utils/actions'
-import Chart from './Chart'
+import Chart from './Chart';
 
 
 
@@ -71,22 +71,26 @@ class ChartDisplay extends Component {
                  <ChartTitle>
                      <H2>Hours Slept</H2>
                  </ChartTitle>
-                 <div>
+                 {/* <div>
                      <Chart data = {this.state.data} />
-                 </div>
-             </ChartContainer>
-         )
-     }
+                 </div> */}
+                 <div style = {{color: 'white'}}>
+                     <NavLink to = '/add-sleep-entry'>
+                        Add Entry
+                    </NavLink>
+                </div>
+            </ChartContainer>
+            )
+}
 }
 
 const mapStateToProps = state => {
-    console.log(state)
-    return({
+    // console.log(state)
+    return {
         data: state.data
-    })
+    }
 };
 
 export default connect(
-    mapStateToProps,
-    // fetchChartData
-)(ChartDisplay);
+    mapStateToProps
+)(ChartDisplay)

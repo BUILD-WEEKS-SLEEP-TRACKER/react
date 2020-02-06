@@ -27,6 +27,7 @@ export const ADD_ENTRY_FAIL = 'ADD_ENTRY_FAIL';
 
 
 
+
 // export const fetchChartData = () => {
 //     return dispatch => {
 //         dispatch({ type: FETCHING_DATA })
@@ -55,10 +56,11 @@ export const register = payload => dispatch => {
     axiosWithAuth()
       .post("api/auth/register", payload)
       .then(res => {
-        console.log(res.data);
+        console.log(res);
         dispatch({ type: SIGNUP_SUCCESS, payload: res.data });
         localStorage.setItem("token", res.data.token);
-        // history.push("/");
+        console.log('token ', res.data.token)
+        // res.history.push("/");
       })
       .catch(err => {
         console.log(err, "Wouldn't it be nice if I worked?");
@@ -72,27 +74,55 @@ export const register = payload => dispatch => {
     return axiosWithAuth()
     .post('api/auth/login', credentials)
     .then(res => {
-        // console.log(res);
+        console.log('This is response in login: ', res);
         localStorage.setItem('token', res.data.token);
+        console.log("this is the token", res.data.token)
+        
+        localStorage.setItem('id', res.data.userId);
+        console.log('this is the response of id', res.data.userId)
+        
         dispatch({ type: LOGIN_SUCCESS, payload: res.data.id });
-        // history.push('/journal');
+        
+        // history.push('/main-page');
     })
     .catch(err => {
         // console.log(err);
         dispatch({ type: LOGIN_FAILED, payload: err })
     })
+};
+
+
+export const getSleepEntries = () => dispatch => {
+    dispatch({ type: FETCHING_DATA });
+    return axiosWithAuth()
+      .get(`api/users/logs`)
+      .then(res => {
+        console.log('This is getSleepEntries action: ', res)
+        dispatch({
+          type: FETCH_SUCCESS,
+          payload: res.data
+        })
+      })
+      .catch(err => 
+        dispatch({
+          type: FETCH_FAILED,
+          payload: err
+        })
+        )
+
 }
 
-//   export const addEntry = (data) => dispatch => {
-//     dispatch ({ type: ADD_ENTRY_START });
-//     return axiosWithAuth()
-//     .post('/users/1/create ', data)
-//     .then(res => {
-//         console.log("this is add entry", res);
-//         dispatch({ type: ADD_ENTRY_SUCCESS, payload: res.data });
-//     })
-//     .catch(err => {
-//         console.log(err);
-//         dispatch({ type: ADD_ENTRY_FAIL, payload: err });
-//     })
-// }
+
+  export const addEntry = (payload) => dispatch => {
+    dispatch ({ type: ADD_ENTRY_START });
+    return axiosWithAuth()
+    .post('/users/1/create', payload)
+    .then(res => {
+        console.log("this is add entry", res);
+        dispatch({ type: ADD_ENTRY_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+        console.log("this is error", err.response);
+        dispatch({ type: ADD_ENTRY_FAIL, payload: err });
+    })
+}

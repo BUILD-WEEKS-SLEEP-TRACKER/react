@@ -4,6 +4,8 @@ import {Link} from "react-router-dom";
 import { login } from '../utils/actions/index';
 import { connect } from 'react-redux';
 
+import {Header, Paragraph, Form, Button, Input, Container, Scontainer} from './SignInStyles'
+
 
 
 
@@ -15,6 +17,7 @@ const SignInForm = (props) => {
   
     const handleChange = (event) => {
       event.preventDefault();
+      
       setCredentials({
         ...credentials,
         [event.target.name]: event.target.value
@@ -30,10 +33,14 @@ const SignInForm = (props) => {
     }
   
     return (
-      <div>
-        <h1>Welcome!</h1>
-        <form onSubmit={handleSubmit}>
-          <input
+      <Container>
+          <Scontainer>
+            <Header>Let’s get started!</Header>
+            <Paragraph>Let Sleep Tracker help you discover your ideal sleep schedule.</Paragraph>
+          </Scontainer>
+        <Form onSubmit={handleSubmit}>
+          <Input
+            style={{width: "560px", height: "56px"}}
             name='email'
             type='text'
             placeholder="Email"
@@ -41,7 +48,8 @@ const SignInForm = (props) => {
             onChange={handleChange}
             required
           />
-          <input
+          <Input
+            style={{width: "560px", height: "56px"}}
             name='password'
             type='password'
             placeholder="Password"
@@ -49,10 +57,13 @@ const SignInForm = (props) => {
             onChange={handleChange}
             required
           />
-          <button type="submit">Log in</button>
-        </form>
-        <Link to='/'><button>Register Here!</button></Link>
-      </div>
+          <div>
+            <Button type="submit">Log in</Button>
+            <Link to='/'><Button>Register Here!</Button></Link>
+          </div>
+        </Form>
+        
+      </Container>
     )
   }
   
