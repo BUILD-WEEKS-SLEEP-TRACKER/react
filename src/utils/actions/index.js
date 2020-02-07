@@ -124,16 +124,17 @@ export const getSleepEntries = () => dispatch => {
     })
   };
 
-  export const deleteEntry = (payload) => dispatch => {
+  export const deleteEntry = () => dispatch => {
     dispatch({ type: DELETE_ENTRY });
+    const entrylog = localStorage.getItem("id")
     return axiosWithAuth()
-    .delete(`/api/users/logs/${payload}`)
+    .delete(`/api/users/logs/${entrylog}`)
     .then(res => {
       console.log('This is delete entry in actions: ', res);
       dispatch({ type: DELETE_ENTRY_SUCCESS, payload: res.data });
     })
     .catch(err =>{ 
-      console.log(err)
+      console.log("this is the error", err)
       dispatch({ type: DELETE_ENTRY_FAILED })
     })
   }

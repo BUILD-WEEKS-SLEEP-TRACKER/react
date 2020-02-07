@@ -53,7 +53,7 @@ class ChartDisplay extends Component {
             datasets: [
                 {
                     label: 'Hours slept',
-                    data: 6 
+                    totalTimeSlept: [6,7,6.5,8,5,8]
                 }
             ],
             backgroundColor: [
