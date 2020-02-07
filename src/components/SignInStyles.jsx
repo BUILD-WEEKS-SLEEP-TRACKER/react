@@ -1,7 +1,6 @@
 import styled from "styled-components"
 
 export const Header= styled.h1`
-    
     width: 448px;
     height: 112px;
     left: 144px;
@@ -14,10 +13,8 @@ export const Header= styled.h1`
     display: flex;
     align-items: center;
     color: rgba(255, 255, 255, 0.87);
-   
- `
+`
 export const Paragraph= styled.p`
-    
     width: 448px;
     height: 56px;
     left: 144px;
@@ -30,8 +27,7 @@ export const Paragraph= styled.p`
     display: flex;
     align-items: center;
     color: rgba(255, 255, 255, 0.6);
-   
- `
+`
 
 export const Form=styled.form`
    width:50%;
@@ -52,22 +48,19 @@ export const Input=styled.input`
     color:white;
 `
 export const Container =styled.div`
-border: 1px solid red;
-display:flex;
-justify-content:center;
-align-items:center;
-text-align:center;
-
-
+   display:flex;
+   justify-content:center;
+   align-items:center;
+   text-align:center;
 `
 export const Scontainer=styled.div`
-border:1px solid blue;
-width:50%;
-display:flex;
-flex-direction: column;
-justify-content:center;
-align-items:center;
-
-
-`
+   width:50%;
+   display:flex;
+   flex-direction: column;
+   justify-content:center;
+   align-items:center;
+   @media (max-width: 500px) {
+      display:none;
+   }
+   `
 

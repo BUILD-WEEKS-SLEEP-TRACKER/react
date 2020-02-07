@@ -10,7 +10,13 @@ import {
   ADD_ENTRY_FAIL,
   FETCHING_DATA,
   FETCH_SUCCESS,
-  FETCH_FAILED
+  FETCH_FAILED,
+  EDIT_ENTRY_START,
+  EDIT_ENTRY_SUCCESS,
+  EDIT_ENTRY_FAILED,
+  DELETE_ENTRY,
+  DELETE_ENTRY_SUCCESS,
+  DELETE_ENTRY_FAILED
 } from "../actions/index";
 
 import moment from "moment";
@@ -33,7 +39,7 @@ const initialState = {
     
   isLoading: false,
   isLoggedIn: false,
-  
+  isEditing: false
 
 };
 
@@ -89,7 +95,8 @@ export const reducer = (state = initialState, action) => {
         fetchingData: true
       };
     case FETCH_SUCCESS:
-      return {
+    console.log("this is the action/payload", action.payload) 
+    return {
         ...state,
         fetchingData: false,
         data: action.payload
@@ -106,7 +113,7 @@ export const reducer = (state = initialState, action) => {
       };
     
     case ADD_ENTRY_SUCCESS:
-      console.log("this is action /payload", action.payload)
+      // console.log("this is action /payload", action.payload)
         return {
         ...state,
         fetchingData: false,
@@ -117,6 +124,40 @@ export const reducer = (state = initialState, action) => {
         ...state,
         error: action.payload
       };
+    case EDIT_ENTRY_START:
+      return {
+        ...state,
+        fetchingData: true,
+        isEditing: true
+      }
+    case EDIT_ENTRY_SUCCESS:
+      return {
+        ...state,
+        fetchingData: false,
+        data: action.payload,
+        isEditing: false
+      };
+    case EDIT_ENTRY_FAILED: 
+    return {
+      ...state,
+      fetchingData: false,
+      error: action.payload,
+    }
+    case DELETE_ENTRY:
+      return{
+        ...state,
+        isEditing: false
+      }
+    case DELETE_ENTRY_SUCCESS:
+      return {
+        ...state,
+        payload: action.payload
+      }
+    case DELETE_ENTRY_FAILED:
+      return {
+        ...state,
+        error: action.payload
+      }
 
     default:
       return state;

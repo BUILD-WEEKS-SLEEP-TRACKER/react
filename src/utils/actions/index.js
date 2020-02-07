@@ -23,32 +23,13 @@ export const ADD_ENTRY_START = 'ADD_ENTRY_START';
 export const ADD_ENTRY_SUCCESS = 'ADD_ENTRY_SUCCESS';
 export const ADD_ENTRY_FAIL = 'ADD_ENTRY_FAIL';
 
+export const EDIT_ENTRY_START = 'EDIT_ENTRY_START';
+export const EDIT_ENTRY_SUCCESS = 'EDIT_ENTRY_SUCCESS';
+export const EDIT_ENTRY_FAILED = 'EDIT_ENTRY_FAILED';
 
-
-
-
-
-// export const fetchChartData = () => {
-//     return dispatch => {
-//         dispatch({ type: FETCHING_DATA })
-//         axios
-//             .get({'https://bw-sleeptracker.herokuapp.com/api/users/:id/logs'})
-//             .then(res => {
-//                 console.log('First axios call (GET)', res)
-//                 dispatch({
-//                     type: FETCH_SUCCESS,
-
-//                 })
-//             })
-//             .catch(err => {
-//                 console.log(err.response)
-//                 dispatch({
-//                     type: FETCH_FAILED,
-//                     payload: `${err}`
-//                 })
-//             })
-//     }
-// }
+export const DELETE_ENTRY = 'DELETE_ENTRY';
+export const DELETE_ENTRY_SUCCESS = 'DELETE_ENTRY_SUCCESS';
+export const DELETE_ENTRY_FAILED = 'DELETE_ENTRY_FAILED';
 
 export const register = payload => dispatch => {
     console.log(payload, "this is the payload in register");
@@ -94,8 +75,10 @@ export const register = payload => dispatch => {
 
 export const getSleepEntries = () => dispatch => {
     dispatch({ type: FETCHING_DATA });
+    
+    const loggedInUser = localStorage.getItem("id")
     return axiosWithAuth()
-      .get(`api/users/logs`)
+      .get(`/api/users/${loggedInUser}/logs`)
       .then(res => {
         console.log('This is getSleepEntries action: ', res)
         dispatch({
@@ -125,4 +108,32 @@ export const getSleepEntries = () => dispatch => {
         console.log("this is error", err.response);
         dispatch({ type: ADD_ENTRY_FAIL, payload: err });
     })
-}
+};
+
+  export const editEntry = (payload) => dispatch => {
+    dispatch({ type: EDIT_ENTRY_START });
+    return axiosWithAuth()
+    .put (`api/users/logs/${localStorage.getItem("id")}`, payload)
+    .then(res => {
+      console.log('This is edit entry in actions: ', res);
+      dispatch({ type: EDIT_ENTRY_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      console.log('This is error of edit entry: ', err);
+      dispatch({ type: EDIT_ENTRY_FAILED, payload: err });
+    })
+  };
+
+  export const deleteEntry = (payload) => dispatch => {
+    dispatch({ type: DELETE_ENTRY });
+    return axiosWithAuth()
+    .delete(`/api/users/logs/${payload}`)
+    .then(res => {
+      console.log('This is delete entry in actions: ', res);
+      dispatch({ type: DELETE_ENTRY_SUCCESS, payload: res.data });
+    })
+    .catch(err =>{ 
+      console.log(err)
+      dispatch({ type: DELETE_ENTRY_FAILED })
+    })
+  }

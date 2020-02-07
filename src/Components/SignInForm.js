@@ -7,8 +7,6 @@ import { connect } from 'react-redux';
 import {Header, Paragraph, Form, Button, Input, Container, Scontainer} from './SignInStyles'
 
 
-
-
 const SignInForm = (props) => {
     const [credentials, setCredentials] = useState({
       email: '',

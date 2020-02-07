@@ -8,10 +8,13 @@ export const HeaderContainer = styled.div`
     padding: 0 0 0 5em;
     height: 7em;
     background: linear-gradient(0deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.09)), #121212;
+   
+   
 `
 
 export const NavBar = styled.nav`
     width: 100%;
+    
 `
 export const NavBarContainer = styled.div`
     display:flex;
@@ -81,4 +84,5 @@ export const GreyContainer = styled.div`
     height: 3.5em;
     width: 100%;
     background: linear-gradient(0deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.16)), #121212;
+ 
 `

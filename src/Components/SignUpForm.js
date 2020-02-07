@@ -4,7 +4,7 @@ import axios from "axios";
 
 import { register } from "../utils/actions/index";
 import { connect } from "react-redux";
-import { Header, Paragraph, Form, Name, Button, Input } from "./SignUpStyles";
+import { Header, Paragraph, Form, Name, Button, Input, Scontainer, Container } from "./SignUpStyles";
 
 const SignUpForm = props => {
   console.log("this is props in Signupform", props);
@@ -42,13 +42,13 @@ const SignUpForm = props => {
     // })
   };
   return (
-    <div className="field">
-      <div>
+    <Container>
+      <Scontainer>
         <Header>Let’s get started!</Header>
         <Paragraph>
           Let Sleep Tracker help you discover your ideal sleep schedule.
         </Paragraph>
-      </div>
+      </Scontainer>
       <Form className="form" onSubmit={submitHandler}>
         <Name>
           <div>
@@ -118,7 +118,7 @@ const SignUpForm = props => {
             <Link to="/sign-in"><Button>Sign In</Button></Link>
         </div>
       </Form>
-    </div>
+    </Container>
   );
 };
 

@@ -6,8 +6,15 @@
   width: 100%;
   height: 100vh;
   background: #121212;
-  
- 
+
+}
+
+.add-entry{
+ text-decoration: none;
+ display:flex;
+ justify-content: center;
+ align-items: center;
+ text-align: center;
 }
 /*CSS RESET
 html, body, div, span, applet, object, iframe,
