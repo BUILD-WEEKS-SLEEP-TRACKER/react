@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { ChartContainer, H2, ChartTitle } from './ChartStyles';
+import { ChartContainer, H2, ChartTitle, Span } from './ChartStyles';
 // import { fetchChartData } from '../utils/actions'
 import Chart from './Chart';
+
+import { getSleepEntries } from '../utils/actions';
+
 
 
 
@@ -12,12 +15,15 @@ class ChartDisplay extends Component {
     constructor() {
         super();
         this.state = {
-            data: {}
-        }
+
+            totalTimeSlept: 0
+
     }
+}
 
     componentWillMount() {
-        this.getChartData();
+        getSleepEntries();
+        console.log('This is state of Chart Display: ',this.state);
     }
 
 
@@ -30,7 +36,7 @@ class ChartDisplay extends Component {
     }    
 
     getChartData = canvas => {
-        const data = this.state.data;
+        const data = this.state.totalTimeSlept;
         if(data.datasets) {
             let colors = [];
             data.datasets.foreach((set, i) => {
@@ -47,22 +53,21 @@ class ChartDisplay extends Component {
             datasets: [
                 {
                     label: 'Hours slept',
-                    data: [
-                        6,
-                        6.5,
-                        7,
-                        8,
-                        6,
-                        6,
-                        9
-                    ]
+                    data: 6 
                 }
             ],
             backgroundColor: [
-                'white'
+                'green',
+                'green',
+                'green',
+                'green',
+                'green',
+                'green',
+                'green'
             ]
         }
     })
+    
 }
 
      render() {
@@ -71,12 +76,12 @@ class ChartDisplay extends Component {
                  <ChartTitle>
                      <H2>Hours Slept</H2>
                  </ChartTitle>
-                 {/* <div>
-                     <Chart data = {this.state.data} />
-                 </div> */}
+                 <div>
+                     <Chart totalTimeSlept = {this.state.totalTimeSlept} />
+                 </div>
                  <div style = {{color: 'white'}}>
-                     <NavLink to = '/add-sleep-entry'>
-                        Add Entry
+                     <NavLink to = '/add-sleep-entry' className="add-entry">
+                        <Span>Add Entry</Span>
                     </NavLink>
                 </div>
             </ChartContainer>
@@ -87,7 +92,7 @@ class ChartDisplay extends Component {
 const mapStateToProps = state => {
     // console.log(state)
     return {
-        data: state.data
+        totalTimeSlept: state.totalTimeSlept
     }
 };
 

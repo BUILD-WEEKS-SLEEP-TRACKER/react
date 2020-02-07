@@ -3,9 +3,11 @@ import { connect } from "react-redux";
 import moment from "moment";
 
 import { addEntry } from "../utils/actions/index";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 import { useForm } from "react-hook-form";
+
+// import { Header } from "./AddSleepEntryStyle";
 
 const initialFormValues = {
   date: `${moment().format("MMM Do YY")}`,
@@ -19,40 +21,29 @@ const initialFormValues = {
 };
 
 const AddSleepEntry = props => {
-  console.log("this is props in add entry", props);
+    console.log("this is props in add entry", props);
   const [payload, setPayload] = useState(initialFormValues);
   const { id } = useParams();
   const { register, handleSubmit, errors } = useForm();
 
-  //   const handleInputChange = event => {
-  //     setPayload({ ...payload, [event.target.name]: event.target.value });
-  //   };
+ 
 
   const Submit = data => {
-    console.log("this is data", data);
-    // event.preventDefault();
+    // console.log("this is data", data);
+    
     const _p = {
       ...data,
       user_id: localStorage.getItem("id")
     };
     props.addEntry(_p);
-    // setPayload({
-    //     date: `${moment().format("MMM Do YY")}`,
-    //     wakeUpRating: "",
-    //     wokeUp:"",
-    //     nightRating: "",
-    //     fellAsleep:"",
-    //     dayRating: "",
-    //     timeCreated: "",
-    //     totalTimeSlept: 0,
-
-    // });
+    // props.history.push("/main-page")
   };
 
   return (
     <form onSubmit={handleSubmit(Submit)}>
       <h3>Sleep Start</h3>
       <label htmlFor="Sleep Start">
+      
         <input 
         name="date" 
         type="date" 
@@ -61,7 +52,6 @@ const AddSleepEntry = props => {
         <input
           name="fellAsleep"
           type="time"
-          // value = {payload.fellAsleep}
           ref={register}
           placeholder="Bed time."
         />
@@ -74,6 +64,7 @@ const AddSleepEntry = props => {
       </label>
       <h3>Sleep End</h3>
       <label htmlFor="Sleep End">
+      
         <input
           name="wokeUp"
           type="time"
@@ -89,6 +80,7 @@ const AddSleepEntry = props => {
       </label>
       <h3>Daily Mood</h3>
       <label htmlFor="Daily Mood">
+       
         <input
           name="timeCreated"
           type="date"
@@ -101,20 +93,21 @@ const AddSleepEntry = props => {
           ref={register}
           placeholder="day mood"
         />
-         <input
+        <input
           name="totalTimeSlept"
-          type="time"
+          type="integer"
           ref={register}
-          placeholder="time-slept"
+          placeholder="time slept"
         />
       </label>
-      <button type="submit">Accept</button>
+
+      <button type="submit">Save</button>
     </form>
   );
 };
 
 const mapStateToProps = state => {
-  console.log("this is state in addsleep entry", state);
+  //   console.log("this is state in addsleep entry", state);
   return {
     data: state.data
   };

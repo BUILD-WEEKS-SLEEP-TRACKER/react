@@ -8,6 +8,8 @@ import SleepCard from "./SleepCard";
 
 import EditSleepEntry from "./EditSleepEntry";
 
+import { useParams } from "react-router-dom";
+
 import {
   H2,
   SleepListTitle,
@@ -19,7 +21,9 @@ import {
 import { getSleepEntries } from "../utils/actions";
 
 const SleepList = props => {
-  console.log("this is props in SleepList", props.data);
+  console.log("this is props in SleepList", props);
+  
+  
 
   function routeToItem(ev, entry) {
     ev.preventDefault();
@@ -28,6 +32,7 @@ const SleepList = props => {
 
   useEffect(() => {
     props.getSleepEntries();
+    
   }, []);
 
   return (
@@ -45,8 +50,10 @@ const SleepList = props => {
                 data={props.data}
                 onClick={ev => routeToItem(ev, entry)}
               >
+              <div>
                 <p>{entry.date}</p>
-
+                <p>{entry.totalTimeSlept}</p>
+              </div>
               </SleepDisplay>
             );
           })}

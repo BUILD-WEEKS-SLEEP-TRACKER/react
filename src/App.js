@@ -12,24 +12,27 @@ import MainPage from "./components/MainPage";
 import Header from "./components/Header";
 
 import AddSleepEntry from "./components/AddSleepEntry";
-
+import EditSleepEntry from "./components/EditSleepEntry"
+import {AppStyles} from "./AppStyles";
 import "./App.css";
 
 function App() {
 
   return (
     <Router>
-      <div className="App">
+      <AppStyles>
         <Header />
-
-        <PrivateRoute  path="/add-sleep-entry" component={AddSleepEntry} />
-
         <PrivateRoute exact path="/main-page" component={MainPage} />
+        <PrivateRoute  path="/add-sleep-entry" component={AddSleepEntry} />
+        
+        <PrivateRoute  path="/edit-sleep-entry/:id">
+          <EditSleepEntry />
+        </PrivateRoute>
 
         <Route exact path="/sign-in" component={SignInForm} />
         <Route exact path="/" component={SignUpForm} />
         
-      </div>
+      </AppStyles>
     </Router>
      
   );
